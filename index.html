@@ -325,7 +325,7 @@
     function gerarHTML() {
       const titulo = document.getElementById('titulo').value.trim();
       const intro = document.getElementById('introducao').value.trim();
-      const campos = document.querySelectorAll('#camposContainer input');
+     const campos = document.querySelectorAll('#camposContainer textarea');
 
       if (!titulo) {
         alert("Por favor, insira o título do produto.");
