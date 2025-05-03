@@ -114,12 +114,6 @@
       margin: 0 auto 20px;
       max-width: 180px;
     }
-    textarea {
-  min-height: 50px;
-  resize: vertical;
-  overflow-y: auto;
-  font-family: inherit;
-}
   </style>
 </head>
 <body>
@@ -247,9 +241,9 @@
 
       <div id="camposGerais" class="hidden">
         <div class="campo">
-           <label>Título</label>
-  <textarea class="form-control" data-label="Título"></textarea>
-</div>
+          <label for="titulo">Título do Produto:</label>
+          <input type="text" id="titulo" placeholder="Ex: Digite um Título para o Produto">
+        </div>
 
         <div class="campo">
           <label for="introducao">Introdução / Descrição:</label>
@@ -275,7 +269,7 @@
       document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
-      document.querySelector(`[onclick="openTab('${tabName}')"]`).classList.add('active');
+      document.querySelector([onclick="openTab('${tabName}')"]).classList.add('active');
       document.getElementById(tabName).classList.add('active');
     }
 
@@ -305,51 +299,40 @@
     }
 
     function gerarCampos() {
-  const container = document.getElementById('camposContainer');
-  const categoria = document.getElementById('categoria').value;
-  container.innerHTML = '';
+      const container = document.getElementById('camposContainer');
+      const categoria = document.getElementById('categoria').value;
+      container.innerHTML = '';
 
-  if (!categoria || !categorias[categoria]) return;
+      if (!categoria || !categorias[categoria]) return;
 
-  categorias[categoria].forEach(topico => {
-    const campo = document.createElement('div');
-    campo.className = 'campo';
-    campo.innerHTML = `
-      <label>${topico}:</label>
-      <textarea rows="2" style="resize: vertical;" data-label="${topico}"></textarea>
-    `;
-    container.appendChild(campo);
-  });
-}
-
-   function gerarHTML() {
-  const nomeProduto = document.getElementById('nomeProduto').value;
-  const campos = document.querySelectorAll('#camposContainer textarea');
-
-  let html = `<h2>${nomeProduto}</h2>\n<ul>\n`;
-
-  campos.forEach(campo => {
-    const label = campo.getAttribute('data-label');
-    const valor = campo.value.trim();
-    if (valor) {
-      html += `  <li><strong>${label}:</strong> ${valor}</li>\n`;
+      categorias[categoria].forEach(topico => {
+        const campo = document.createElement('div');
+        campo.className = 'campo';
+        campo.innerHTML = <label>${topico}:</label><input type="text" data-label="${topico}">;
+        container.appendChild(campo);
+      });
     }
-  });
 
-  html += `</ul>`;
-  document.getElementById('codigoHTML').value = html;
-}
+    function gerarHTML() {
+      const titulo = document.getElementById('titulo').value.trim();
+      const intro = document.getElementById('introducao').value.trim();
+      const campos = document.querySelectorAll('#camposContainer input');
 
-      let html = `<h1>${titulo}</h1>`;
-      if (intro) html += `<p>${intro}</p>`;
+      if (!titulo) {
+        alert("Por favor, insira o título do produto.");
+        return;
+      }
 
-      html += `<h3><strong>Especificações Técnicas:</strong></h3>`;
+      let html = <h1>${titulo}</h1>;
+      if (intro) html += <p>${intro}</p>;
+
+      html += <h3><strong>Especificações Técnicas:</strong></h3>;
 
       campos.forEach(input => {
         const label = input.getAttribute('data-label');
         const valor = input.value.trim();
         if (valor !== '') {
-          html += `<p><strong>${label}:</strong> ${valor}</p>`;
+          html += <p><strong>${label}:</strong> ${valor}</p>;
         }
       });
 
@@ -389,7 +372,7 @@
 }
 
 function limparFormulario(idFormulario) {
-  const inputs = document.querySelectorAll(`#${idFormulario} input, #${idFormulario} textarea, #${idFormulario} select`);
+  const inputs = document.querySelectorAll(#${idFormulario} input, #${idFormulario} textarea, #${idFormulario} select);
   inputs.forEach(input => {
     if (input.tagName === "SELECT") {
       input.selectedIndex = 0;
@@ -446,14 +429,14 @@ function limparFormulario(idFormulario) {
      
       }
 
-      const mensagem = `_Oba! O seu pedido está prontinho para ser retirado_! 🛒📦\n\n Olá, *${nome.value}* \n\nSou o Eduardo, do time da Panorama Materiais de Construção. Notamos que você fez uma compra em nosso site. Agradecemos pela preferência e informamos que seu pedido está disponível para retirada na filial: *${filial.value}*🏬.\n\n📍${endereco.value}\n${horario}\n\nAo chegar, por favor, apresente o número da sua compra *${pedido.value}*.
-\n\n\Mais uma vez, obrigado pela escolha e estamos à disposição para qualquer dúvida 🤗.\n\nObrigado e até breve! 🧡💚`;
+      const mensagem = _Oba! O seu pedido está prontinho para ser retirado_! 🛒📦\n\n Olá, *${nome.value}* \n\nSou o Eduardo, do time da Panorama Materiais de Construção. Notamos que você fez uma compra em nosso site. Agradecemos pela preferência e informamos que seu pedido está disponível para retirada na filial: *${filial.value}*🏬.\n\n📍${endereco.value}\n${horario}\n\nAo chegar, por favor, apresente o número da sua compra *${pedido.value}*.
+\n\n\Mais uma vez, obrigado pela escolha e estamos à disposição para qualquer dúvida 🤗.\n\nObrigado e até breve! 🧡💚;
       abrirWhatsApp(telefoneLimpo, mensagem);
       limparFormulario('retirada'); 
     }
 
     function abrirWhatsApp(telefone, mensagem) {
-      const url = `https://web.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`;
+      const url = https://web.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)};
       window.open(url, "_blank");
       
 }
@@ -466,7 +449,7 @@ function enviarMensagemRastreamento() {
       if (!validarCampos([nome, telefone, nf])) return;
 
       const telefoneLimpo = telefone.value.replace(/\D/g, "");
-      const mensagem = `Oba! Seu Pedido Foi Enviado! 🛒🚚\n\nOlá, *${nome.value}*!\n\nEstamos felizes em informar que o seu pedido foi enviado e está a caminho! 🎉\n\nPara acompanhar a entrega, basta seguir o passo a passo:\n\n1. Entre no Link: https://rodonaves.com.br/rastreio-de-mercadoria\n2. Escolher a Opção Nota Fiscal\n3. Colocar o seu CPF ou CNPJ\n4. Digite o Número da Nota Fiscal (*${nf.value}*)\n\n⚠️ *Caso a entrega apresentar embalagem avariada, produto danificado ou em desacordo com o solicitado, recuse-se e entre em contato imediatamente com a nossa Central de Apoio no WhatsApp (45) 98842-1985. A solicitação de devolução deve ser realizada em até 48h a contar a partir da data de recebimento do produto.* \n\nAgradecemos por escolher nossa empresa! Estamos à disposição para qualquer dúvida.💪🏼\n\nAtenciosamente,\n*Equipe Panorama* 💚🧡`;
+      const mensagem = Oba! Seu Pedido Foi Enviado! 🛒🚚\n\nOlá, *${nome.value}*!\n\nEstamos felizes em informar que o seu pedido foi enviado e está a caminho! 🎉\n\nPara acompanhar a entrega, basta seguir o passo a passo:\n\n1. Entre no Link: https://rodonaves.com.br/rastreio-de-mercadoria\n2. Escolher a Opção Nota Fiscal\n3. Colocar o seu CPF ou CNPJ\n4. Digite o Número da Nota Fiscal (*${nf.value}*)\n\n⚠️ *Caso a entrega apresentar embalagem avariada, produto danificado ou em desacordo com o solicitado, recuse-se e entre em contato imediatamente com a nossa Central de Apoio no WhatsApp (45) 98842-1985. A solicitação de devolução deve ser realizada em até 48h a contar a partir da data de recebimento do produto.* \n\nAgradecemos por escolher nossa empresa! Estamos à disposição para qualquer dúvida.💪🏼\n\nAtenciosamente,\n*Equipe Panorama* 💚🧡;
 
       abrirWhatsApp(telefoneLimpo, mensagem);
       limparFormulario('rastreamento');
@@ -481,7 +464,7 @@ function enviarMensagemRastreamento() {
       if (!validarCampos([nome, telefone, produto])) return;
 
       const telefoneLimpo = telefone.value.replace(/\D/g, "");
-      const mensagem = `Olá, *${nome.value}*! 🙂\n\nSou o Eduardo, do time da Panorama Materiais de Construção. Observei que você adicionou alguns produtos ao seu carrinho, mas não finalizou o pedido. Gostaria de saber se houve algum imprevisto e se posso ajudar de alguma forma.\n\nLembre-se: caso tenha tido dificuldades ao concluir a compra ou se as opções de pagamento não atenderam suas necessidades, por favor, me avise.\n\nEstou à disposição para ajudar. Conte comigo\n\nAtenciosamente,\n*Equipe Panorama* 💚🧡`;
+      const mensagem = Olá, *${nome.value}*! 🙂\n\nSou o Eduardo, do time da Panorama Materiais de Construção. Observei que você adicionou alguns produtos ao seu carrinho, mas não finalizou o pedido. Gostaria de saber se houve algum imprevisto e se posso ajudar de alguma forma.\n\nLembre-se: caso tenha tido dificuldades ao concluir a compra ou se as opções de pagamento não atenderam suas necessidades, por favor, me avise.\n\nEstou à disposição para ajudar. Conte comigo\n\nAtenciosamente,\n*Equipe Panorama* 💚🧡;
 
       abrirWhatsApp(telefoneLimpo, mensagem);
       limparFormulario('recuperacao');
@@ -496,14 +479,14 @@ function enviarMensagemRastreamento() {
       if (!validarCampos([nome, telefone, produto, resolucao])) return;
 
       const telefoneLimpo = telefone.value.replace(/\D/g, "");
-      const mensagem = `Olá, *${nome.value}*\n\nSou o Eduardo, do time da Panorama Materiais de Construção.\n\nDurante o processo de separação, identificamos um pequeno contratempo com o seu pedido devido a uma falta de estoque no item:  *${produto.value}*\n\n${resolucao.value}\n\nObrigado e Aguardo retorno 🧡💚`;
+      const mensagem = Olá, *${nome.value}*\n\nSou o Eduardo, do time da Panorama Materiais de Construção.\n\nDurante o processo de separação, identificamos um pequeno contratempo com o seu pedido devido a uma falta de estoque no item:  *${produto.value}*\n\n${resolucao.value}\n\nObrigado e Aguardo retorno 🧡💚;
 
       abrirWhatsApp(telefoneLimpo, mensagem);
       limparFormulario('ruptura');
     }
 
     function abrirWhatsApp(telefone, mensagem) {
-      const url = `https://web.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`;
+      const url = https://web.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)};
       window.open(url, "_blank");
     }
 
