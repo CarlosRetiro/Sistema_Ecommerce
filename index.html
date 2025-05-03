@@ -114,6 +114,12 @@
       margin: 0 auto 20px;
       max-width: 180px;
     }
+    textarea {
+  min-height: 50px;
+  resize: vertical;
+  overflow-y: auto;
+  font-family: inherit;
+}
   </style>
 </head>
 <body>
@@ -299,19 +305,22 @@
     }
 
     function gerarCampos() {
-      const container = document.getElementById('camposContainer');
-      const categoria = document.getElementById('categoria').value;
-      container.innerHTML = '';
+  const container = document.getElementById('camposContainer');
+  const categoria = document.getElementById('categoria').value;
+  container.innerHTML = '';
 
-      if (!categoria || !categorias[categoria]) return;
+  if (!categoria || !categorias[categoria]) return;
 
-      categorias[categoria].forEach(topico => {
-        const campo = document.createElement('div');
-        campo.className = 'campo';
-        campo.innerHTML = `<label>${topico}:</label><input type="text" data-label="${topico}">`;
-        container.appendChild(campo);
-      });
-    }
+  categorias[categoria].forEach(topico => {
+    const campo = document.createElement('div');
+    campo.className = 'campo';
+    campo.innerHTML = `
+      <label>${topico}:</label>
+      <textarea rows="2" style="resize: vertical;" data-label="${topico}"></textarea>
+    `;
+    container.appendChild(campo);
+  });
+}
 
     function gerarHTML() {
       const titulo = document.getElementById('titulo').value.trim();
