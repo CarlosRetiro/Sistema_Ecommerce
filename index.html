@@ -322,15 +322,23 @@
   });
 }
 
-    function gerarHTML() {
-      const titulo = document.getElementById('titulo').value.trim();
-      const intro = document.getElementById('introducao').value.trim();
-     const campos = document.querySelectorAll('#camposContainer textarea');
+   function gerarHTML() {
+  const nomeProduto = document.getElementById('nomeProduto').value;
+  const campos = document.querySelectorAll('#camposContainer textarea');
 
-      if (!titulo) {
-        alert("Por favor, insira o título do produto.");
-        return;
-      }
+  let html = `<h2>${nomeProduto}</h2>\n<ul>\n`;
+
+  campos.forEach(campo => {
+    const label = campo.getAttribute('data-label');
+    const valor = campo.value.trim();
+    if (valor) {
+      html += `  <li><strong>${label}:</strong> ${valor}</li>\n`;
+    }
+  });
+
+  html += `</ul>`;
+  document.getElementById('codigoHTML').value = html;
+}
 
       let html = `<h1>${titulo}</h1>`;
       if (intro) html += `<p>${intro}</p>`;
