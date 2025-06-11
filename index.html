@@ -155,7 +155,7 @@
         <option value="CATARATAS">CATARATAS</option>
         <option value="CENTRO DE DISTRIBUIÇÃO">CENTRO DE DISTRIBUIÇÃO</option>
         <option value="PORTO MEIRA">PORTO MEIRA</option>
-        <option value="EXPRESS - CENTRO">CENTRO</option>
+        <option value="EXPRESS - CENTRO">EXPRESS</option>
         <option value="MEDIANEIRA">MEDIANEIRA</option>
         <option value="TOLEDO">TOLEDO</option>
         <option value="SANTA TEREZINHA DE ITAIPU">SANTA TEREZINHA DE ITAIPU</option>
@@ -426,7 +426,7 @@ function limparFormulario(idFormulario) {
 
       const telefoneLimpo = telefone.value.replace(/\D/g, "");
       let horario = "🕗 Seg – sex: 08h às 18h\n🕐 Sab: 08h às 13h.";
-      if (filial.value.toLowerCase().includes("centro")) {
+      if (filial.value.toLowerCase().includes("express")) {
         horario = "🕗 Seg – sex: 08h às 20h\n🕐 Sab: 08h às 16h.\n🕐 Dom: 09h às 14h.";
      
       }
