@@ -153,9 +153,9 @@
         <option value="VILA “A”">VILA “A”</option>
         <option value="MORUMBI">MORUMBI</option>
         <option value="CATARATAS">CATARATAS</option>
-        <option value="CD">CENTRO DE DISTRIBUIÇÃO</option>
+        <option value="CENTRO DE DISTRIBUIÇÃO">CENTRO DE DISTRIBUIÇÃO</option>
         <option value="PORTO MEIRA">PORTO MEIRA</option>
-        <option value="CENTRO">CENTRO</option>
+        <option value="EXPRESS - CENTRO">CENTRO</option>
         <option value="MEDIANEIRA">MEDIANEIRA</option>
         <option value="TOLEDO">TOLEDO</option>
         <option value="SANTA TEREZINHA DE ITAIPU">SANTA TEREZINHA DE ITAIPU</option>
@@ -404,9 +404,9 @@ function limparFormulario(idFormulario) {
         "VILA “A”": "Avenida Silvio Américo Sasdelli, 2037 - Jardim Lancaster",
         "MORUMBI": "Avenida Mário Filho, 1566 - Morumbi II",
         "CATARATAS": "Avenida das Cataratas, 1110 - Vila Yolanda",
-        "CD": "Avenida Costa e Silva, 3300 - Beverly Falls Park",
+        "CENTRO DE DISTRIBUIÇÃO": "Avenida Costa e Silva, 3300 - Beverly Falls Park",
         "PORTO MEIRA": "Avenida Morenitas, 55 - Porto Meira",
-        "CENTRO": "Rua Marechal Deodoro Da Fonseca, 644 - Centro",
+        "EXPRESS - CENTRO": "Rua Marechal Deodoro Da Fonseca, 644 - Centro",
         "MEDIANEIRA": "Avenida Brasil, 2555 - São Cristóvão",
         "TOLEDO": "Rua Carlos Barbosa, 2728 - Vila Industrial - Bairro Tocantins",
         "SANTA TEREZINHA DE ITAIPU": "Avenida Adolfo Lollato, 1934 - Centro"
@@ -426,7 +426,7 @@ function limparFormulario(idFormulario) {
 
       const telefoneLimpo = telefone.value.replace(/\D/g, "");
       let horario = "🕗 Seg – sex: 08h às 18h\n🕐 Sab: 08h às 13h.";
-      if (filial.value.toLowerCase().includes("centro")) {
+      if (filial.value.toLowerCase().includes("EXPRESS - CENTRO")) {
         horario = "🕗 Seg – sex: 08h às 20h\n🕐 Sab: 08h às 16h.\n🕐 Dom: 09h às 14h.";
      
       }
