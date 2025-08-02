@@ -133,6 +133,7 @@
     <div id="menuInicial">
       <button onclick="mostrarFormulario('retirada')">Retirada de Mercadorias</button>
       <button onclick="mostrarFormulario('rastreamento')">Rastreamento Transportadora</button>
+      <button onclick="mostrarFormulario('correios')">Rastreamento Correios</button>
       <button onclick="mostrarFormulario('ruptura')">Ruptura de Estoque</button>
       <button onclick="mostrarFormulario('recuperacao')">Recuperação de Vendas</button>
     </div>
@@ -191,6 +192,17 @@
       <label>Produto:</label>
       <input type="text" id="produtoRecuperacao" />
       <button onclick="enviarMensagemRecuperacao()">Enviar Mensagem</button>
+      <button onclick="voltarMenu()">Voltar ao Menu</button>
+    </div>
+    <div id="correios" class="hidden">
+      <h2>Rastreamento Correios</h2>
+      <label>Nome do Cliente:</label>
+      <input type="text" id="nomeCorreios" />
+      <label>Telefone:</label>
+      <input type="text" id="telefoneCorreios" />
+      <label>Código Rastreio:</label>
+      <input type="text" id="codRastreio" />
+      <button onclick="enviarMensagemCorreios()">Enviar Mensagem</button>
       <button onclick="voltarMenu()">Voltar ao Menu</button>
     </div>
 
@@ -363,7 +375,7 @@
   });
   
   // Além disso, reseta todos os formulários específicos
-  ['retirada', 'rastreamento', 'recuperacao', 'ruptura'].forEach(id => {
+  ['retirada', 'rastreamento', 'recuperacao', 'ruptura', 'correios'].forEach(id => {
     const form = document.getElementById(id);
     if (form) form.classList.add('hidden');
     limparFormulario('retirada');
@@ -456,6 +468,19 @@ function enviarMensagemRastreamento() {
       abrirWhatsApp(telefoneLimpo, mensagem);
       limparFormulario('rastreamento');
     }
+function enviarMensagemCorreios() {
+      const nome = document.getElementById("nomeCorreios");
+      const telefone = document.getElementById("telefoneCorreios");
+      const cod = document.getElementById("codRastreio");
+
+      if (!validarCampos([nome, telefone, cod])) return;
+
+      const telefoneLimpo = telefone.value.replace(/\D/g, "");
+      const mensagem = `Oba! Seu Pedido Foi Enviado! 🛒🚚\n\nOlá, *${nome.value}*!\n\nEstamos felizes em informar que o seu pedido foi enviado e está a caminho! 🎉\n\nPara acompanhar a entrega, basta seguir o passo a passo:\n\n1. Entre no Link: https://rastreamento.correios.com.br/app/index.php\n2. Digite o código de Rastreio *(${cod.value})*\n3. Digite os Caracteres e Consulte o Rastreamento✅ \n\n Agradecemos por escolher nossa empresa! Estamos à disposição para qualquer dúvida.💪🏼\n\nAtenciosamente,\n*Equipe Panorama* 💚🧡`;
+
+      abrirWhatsApp(telefoneLimpo, mensagem);
+      limparFormulario('rastreamento');
+    }
 
     function enviarMensagemRecuperacao() {
       const nome = document.getElementById("nomeRecuperacao");
@@ -496,3 +521,4 @@ function enviarMensagemRastreamento() {
 
 </body>
 </html>
+
