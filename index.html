@@ -476,7 +476,7 @@ function enviarMensagemCorreios() {
       if (!validarCampos([nome, telefone, cod])) return;
 
       const telefoneLimpo = telefone.value.replace(/\D/g, "");
-      const mensagem = `Oba! Seu Pedido Foi Enviado! 🛒🚚\n\nOlá, *${nome.value}*!\n\nEstamos felizes em informar que o seu pedido foi enviado e está a caminho! 🎉\n\nPara acompanhar a entrega, basta seguir o passo a passo:\n\n1. Entre no Link: https://rastreamento.correios.com.br/app/index.php\n2. Digite o código de Rastreio *(${cod.value})*\n3. Digite os Caracteres e Consulte o Rastreamento✅ \n\n Agradecemos por escolher nossa empresa! Estamos à disposição para qualquer dúvida.💪🏼\n\nAtenciosamente,\n*Equipe Panorama* 💚🧡`;
+      const mensagem = `Oba! Seu Pedido Foi Enviado! 🛒🚚\n\nOlá, *${nome.value}*!\n\nEstamos felizes em informar que o seu pedido foi enviado e está a caminho! 🎉\n\nPara acompanhar a entrega, basta seguir o passo a passo:\n\n1. Entre no Link: https://rastreamento.correios.com.br/app/index.php\n2. Digite o código de Rastreio *(${cod.value})*\n3. Digite os Caracteres e Consulte o Rastreamento ✅ \n\n Agradecemos por escolher nossa empresa! Estamos à disposição para qualquer dúvida.💪🏼\n\nAtenciosamente,\n*Equipe Panorama* 💚🧡`;
 
       abrirWhatsApp(telefoneLimpo, mensagem);
       limparFormulario('rastreamento');
@@ -521,4 +521,5 @@ function enviarMensagemCorreios() {
 
 </body>
 </html>
+
 
